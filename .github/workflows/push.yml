@@ -63,8 +63,6 @@ jobs:
             name: immudb-binaries
             path: dist
             retention-days: 5
-        - name: Calculate checksums
-          run: make dist/binary.md
         - name: Manifest Generation
           run: |
             export BILLY_SERVER=https://billy.codesec.aquasec.com
