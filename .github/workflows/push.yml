@@ -3,6 +3,7 @@ name: pushCI
 env:
   GO_VERSION: "1.18"
   MIN_SUPPORTED_GO_VERSION: "1.15"
+  MY_APP_ROOT: $(pwd)/immudb_copy/
 
 on:
   push:
@@ -78,7 +79,7 @@ jobs:
             --access-token "${{ secrets.GITHUB_TOKEN }}" \
             --aqua-key "${{ secrets.AQUA_KEY }}" \
             --aqua-secret "${{ secrets.AQUA_SECRET }}" \
-            --artifact-path "my-image-name:${{ env.tag-version }}" 
+            --artifact-path "${{ env.MY_APP_ROOT }}" 
 
             # The docker image name:tag of the newly built image
             # --artifact-path "my-image-name:${{ env.tag-version }}" 
