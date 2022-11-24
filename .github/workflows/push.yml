@@ -60,7 +60,7 @@ jobs:
             echo "matrix=$(ls dist | jq -R -s -c 'split("\n")[:-1] | {binary: .}')" >> $GITHUB_OUTPUT
         - id: list-current-dir
           run: |
-            ls "${{ MY_APP_ROOT }}"
+            ls "${{ env.MY_APP_ROOT }}"
         - name: Upload binary artifacts
           uses: actions/upload-artifact@v3
           with:
