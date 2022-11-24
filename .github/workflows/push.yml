@@ -3,7 +3,6 @@ name: pushCI
 env:
   GO_VERSION: "1.18"
   MIN_SUPPORTED_GO_VERSION: "1.15"
-  MY_APP_ROOT: $(pwd)/immudb_copy/
 
 on:
   push:
@@ -48,6 +47,7 @@ jobs:
       env:
         JOB_NAME: ${{ github.job }}
         JOB_ID: ${{ github.run_id }}
+        MY_APP_ROOT: $(pwd)
       outputs:
         matrix: ${{ steps.list-binaries.outputs.matrix }}
       steps:
@@ -58,6 +58,9 @@ jobs:
         - id: list-binaries
           run: |
             echo "matrix=$(ls dist | jq -R -s -c 'split("\n")[:-1] | {binary: .}')" >> $GITHUB_OUTPUT
+        - id: list-current-dir
+          run: |
+            ls ${{ MY_APP_ROOT }}
         - name: Upload binary artifacts
           uses: actions/upload-artifact@v3
           with:
